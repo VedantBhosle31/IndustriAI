@@ -1,0 +1,123 @@
+,Value
+address1,410 Terry Avenue North
+city,Seattle
+state,WA
+zip,98109-5210
+country,United States
+phone,206 266 1000
+website,https://www.aboutamazon.com
+industry,Internet Retail
+industryKey,internet-retail
+industryDisp,Internet Retail
+sector,Consumer Cyclical
+sectorKey,consumer-cyclical
+sectorDisp,Consumer Cyclical
+longBusinessSummary,"Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS). It also manufactures and sells electronic devices, including Kindle, Fire tablets, Fire TVs, Echo, Ring, Blink, and eero; and develops and produces media content. In addition, the company offers programs that enable sellers to sell their products in its stores; and programs that allow authors, independent publishers, musicians, filmmakers, Twitch streamers, skill and app developers, and others to publish and sell content. Further, it provides compute, storage, database, analytics, machine learning, and other services, as well as advertising services through programs, such as sponsored ads, display, and video advertising. Additionally, the company offers Amazon Prime, a membership program. The company's products offered through its stores include merchandise and content purchased for resale and products offered by third-party sellers. It serves consumers, sellers, developers, enterprises, content creators, advertisers, and employees. Amazon.com, Inc. was incorporated in 1994 and is headquartered in Seattle, Washington."
+fullTimeEmployees,1551000
+companyOfficers,"[{'maxAge': 1, 'name': 'Mr. Jeffrey P. Bezos', 'age': 60, 'title': 'Founder & Executive Chairman', 'yearBorn': 1964, 'fiscalYear': 2023, 'totalPay': 1681840, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Andrew R. Jassy', 'age': 56, 'title': 'President, CEO & Director', 'yearBorn': 1968, 'fiscalYear': 2023, 'totalPay': 1722764, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Brian T. Olsavsky', 'age': 60, 'title': 'Senior VP & CFO', 'yearBorn': 1964, 'fiscalYear': 2023, 'totalPay': 371600, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. David A. Zapolsky J.D.', 'age': 60, 'title': 'Senior VP of Global Public Policy & General Counsel', 'yearBorn': 1964, 'fiscalYear': 2023, 'totalPay': 371600, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Douglas J. Herrington', 'age': 57, 'title': 'Chief Executive Officer of Worldwide Amazon Stores', 'yearBorn': 1967, 'fiscalYear': 2023, 'totalPay': 394231, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Shelley L. Reynolds', 'age': 59, 'title': 'VP, Worldwide Controller & Principal Accounting Officer', 'yearBorn': 1965, 'fiscalYear': 2023, 'totalPay': 163200, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Dr. Werner  Vogels', 'title': 'Chief Technology Officer', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Dave  Fildes', 'title': 'Director of Investor Relations', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Anuradha  Aggarwal', 'title': 'CMO & Director of User Growth', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Beth  Galetti M.B.A.', 'title': 'Senior Vice President of Worldwide Human Resources', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}]"
+auditRisk,2
+boardRisk,10
+compensationRisk,10
+shareHolderRightsRisk,3
+overallRisk,9
+governanceEpochDate,1735689600
+compensationAsOfEpochDate,1703980800
+irWebsite,http://phx.corporate-ir.net/phoenix.zhtml?c=97664&p=irol-irhome
+maxAge,86400
+priceHint,2
+previousClose,220.22
+open,222.5
+dayLow,221.62
+dayHigh,225.36
+regularMarketPreviousClose,220.22
+regularMarketOpen,222.5
+regularMarketDayLow,221.62
+regularMarketDayHigh,225.36
+beta,1.146
+trailingPE,47.801704
+forwardPE,36.321777
+volume,27427568
+regularMarketVolume,27427568
+averageVolume,37601704
+averageVolume10days,32937170
+averageDailyVolume10Day,32937170
+bid,223.94
+ask,233.8
+bidSize,100
+askSize,100
+marketCap,2357357969408
+fiftyTwoWeekLow,146.15
+fiftyTwoWeekHigh,233.0
+priceToSalesTrailing12Months,3.8014057
+fiftyDayAverage,211.158
+twoHundredDayAverage,190.20895
+currency,USD
+enterpriseValue,2427844296704
+profitMargins,0.080419995
+floatShares,9386750327
+sharesOutstanding,10515000320
+sharesShort,83302458
+sharesShortPriorMonth,83771987
+sharesShortPreviousMonthDate,1731628800
+dateShortInterest,1734048000
+sharesPercentSharesOut,0.007900001
+heldPercentInsiders,0.1013
+heldPercentInstitutions,0.64301
+shortRatio,2.09
+shortPercentOfFloat,0.0089
+impliedSharesOutstanding,10515000320
+bookValue,24.655
+priceToBook,9.093084
+lastFiscalYearEnd,1703980800
+nextFiscalYearEnd,1735603200
+mostRecentQuarter,1727654400
+earningsQuarterlyGrowth,0.552
+netIncomeToCommon,49868001280
+trailingEps,4.69
+forwardEps,6.15
+lastSplitFactor,20:1
+lastSplitDate,1654473600
+enterpriseToRevenue,3.915
+enterpriseToEbitda,21.758
+52WeekChange,0.5036217
+SandP52WeekChange,0.24749029
+exchange,NMS
+quoteType,EQUITY
+symbol,AMZN
+underlyingSymbol,AMZN
+shortName,"Amazon.com, Inc."
+longName,"Amazon.com, Inc."
+firstTradeDateEpochUtc,863703000
+timeZoneFullName,America/New_York
+timeZoneShortName,EST
+uuid,261fd26b-0151-3813-b0d0-97e4ed4c6505
+messageBoardId,finmb_18749
+gmtOffSetMilliseconds,-18000000
+currentPrice,224.19
+targetHighPrice,285.0
+targetLowPrice,180.0
+targetMeanPrice,240.69844
+targetMedianPrice,238.0
+recommendationMean,1.40299
+recommendationKey,strong_buy
+numberOfAnalystOpinions,64
+totalCash,88050999296
+totalCashPerShare,8.374
+ebitda,111583002624
+totalDebt,158534991872
+quickRatio,0.827
+currentRatio,1.089
+totalRevenue,620127977472
+debtToEquity,61.175
+revenuePerShare,59.486
+returnOnAssets,0.07069
+returnOnEquity,0.22558
+freeCashflow,54328250368
+operatingCashflow,112706002944
+earningsGrowth,0.521
+revenueGrowth,0.11
+grossMargins,0.48406
+ebitdaMargins,0.17994
+operatingMargins,0.109589994
+financialCurrency,USD
+trailingPegRatio,1.838

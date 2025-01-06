@@ -10,6 +10,10 @@ import pandas as pd
 from references import ESG_SUSTAINALYTICS_MAPPING
 import json
 import os
+import pandas as pd
+import requests as R
+
+
 os.environ['GROQ_API_KEY'] = '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'
 
 esg_analyser = ESGAnalyzer()
@@ -123,6 +127,47 @@ def portfoilio_chat():
     if not prompt and not doc:
         response = {"error": "No prompt or document provided."}
     return jsonify(response)
+
+def rest_api_call(url, method, data=None, headers=None):
+    url = 'http://127.0.0.1:5000' + url
+    if headers is None:
+        headers = {'Content-Type': 'application/json'}
+    response = R.request(method, url, headers=headers, data=data)
+    return response.json()
+
+@app.route('/api/one/', methods=['GET'])
+def get_portfolio(prompt = "Improve my strategies"):
+    tickers = request.args.get('portfolio').split(',')
+    portfolio_data = []
+    for ticker in tickers:
+        history = rest_api_call(f'/api/finance/technicals/{ticker}', method='GET')
+        last = history[-1]
+        last_to_last = history[-2]
+        month_ago = history[-31]
+        percentage_change = (last['Close'] - last_to_last['Close'])/last_to_last['Close']*100
+        roi = ((last['Close']/month_ago['Close'])-1)*100
+        roi_prev = ((last_to_last['Close']/month_ago['Close'])-1)*100
+        roi_pct = ((roi-roi_prev)/roi_prev)*100
+        data = {'Value':last['Close'],
+        'name': ticker,
+        'ticker_name':ticker,
+        'percentage_change':percentage_change,
+        'sign': percentage_change > 0,
+        'ESG': rest_api_call(f'/api/analytics/esg/{ticker}', method='GET')['analysis']['total_esg'],
+        'Risk': rest_api_call(f'/api/analytics/risk/{ticker}', method='GET')['risk_score'],
+        'ROI' : roi,
+        'ROI_PCT' : roi_pct,
+        'Principle': month_ago['Close'],
+        }
+        portfolio_data.append(data)
+    ret = {'tickers':portfolio_data,
+        'overall':pd.DataFrame(portfolio_data)[['ESG','Risk', 'ROI', 'Principle']].mean().to_dict(),
+        'swot':rest_api_call(f"/api/analytics/swot?portfolio={','.join(tickers)}","GET"),
+        "strategies":rest_api_call(f"/api/analytics/strategies?portfolio={','.join(tickers)}?prompt={prompt}", 'GET', data=None, headers=None),
+        }
+    return ret
+
+
 
 # Run the app
 if __name__ == "__main__":
