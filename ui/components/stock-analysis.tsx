@@ -15,7 +15,7 @@ const data = [
   { name: "Jun", value: 150 },
 ]
 
-export function StockAnalysis({ stock = "META", price = 150, rating = "AA" }) {
+export function StockAnalysis({ stock = "META", price = 150, rating = "+2%" }) {
   return (
     <Card>
       <CardHeader>

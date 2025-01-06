@@ -2,9 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowUpIcon, ArrowDownIcon } from 'lucide-react'
 
 const recommendations = [
-  { action: "Buy", stock: "Bose", change: "+2.5%", days: 21, type: "Value" },
+  { action: "Buy", stock: "Apple", change: "+2.5%", days: 21, type: "Value" },
   { action: "Buy", stock: "Bose", change: "+25%", days: 21, type: "ESG" },
-  { action: "Sell", stock: "Meta", change: "+45.3%", days: 67, type: "Risk" },
+  { action: "Sell", stock: "Alphabet", change: "+45.3%", days: 67, type: "Risk" },
   { action: "Sell", stock: "Meta", change: "-25.3%", days: 67, type: "ESG" },
 ]
 

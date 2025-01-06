@@ -2,11 +2,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowUpIcon, ArrowDownIcon } from 'lucide-react'
 
 const metrics = [
-  { name: "Principal", value: 62, change: 2.3 },
-  { name: "ROI", value: 62, change: -1.5 },
-  { name: "ESG", value: 62, change: 3.7 },
-  { name: "Risk", value: 62, change: -0.8 },
-  { name: "Diversity", value: 62, change: 1.2 },
+  { name: "Principal", value: 287, change: 2.3 },
+  { name: "ROI", value: 13, change: -1.5 },
+  { name: "ESG", value: 20.1, change: 3.7 },
+  { name: "Risk", value: 63, change: -0.8 },
+  { name: "Diversity", value: 54, change: 1.2 },
 ]
 
 const swotColors = {
@@ -21,16 +21,32 @@ const recommendations = [
     action: "Buy",
     stock: "Bose",
     changes: [
-      { value: "+2.5%", note: "since 21 days" },
-      { value: "+25%", note: "ESG since 67 days" }
+      { value: "+17%", note: "since 21 days" },
+      // { value: "+25%", note: "ESG since 67 days" }
+    ]
+  },
+  {
+    action: "Buy",
+    stock: "Apple",
+    changes: [
+      // { value: "+2.5%", note: "since 21 days" },
+      { value: "+10%", note: "ESG since 67 days" }
     ]
   },
   {
     action: "Sell",
     stock: "Meta",
     changes: [
-      { value: "-45.3%", note: "Risk since 21 days" },
+      // { value: "-45.3%", note: "Risk since 21 days" },
       { value: "-25.3%", note: "ESG since 67 days" }
+    ]
+  },
+  {
+    action: "Sell",
+    stock: "Alphabet",
+    changes: [
+      { value: "-45.3%", note: "Risk since 21 days" },
+      // { value: "-25.3%", note: "ESG since 67 days" }
     ]
   }
 ]
@@ -44,8 +60,9 @@ export function PortfolioMetrics() {
         {/* Metrics Section */}
         <div className="grid grid-cols-5 gap-4 mb-8">
           {metrics.map((metric) => (
+
             <div key={metric.name} className="text-center">
-              <div className="text-3xl font-bold mb-1">62%</div>
+              <div className="text-3xl font-bold mb-1">{metric.name == "Principal" ? "$" + metric.value : metric.value + "%"}</div>
               <div className={`text-sm font-medium ${metric.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                 {metric.change >= 0 ? '+' : ''}{metric.change}%
               </div>
@@ -57,10 +74,22 @@ export function PortfolioMetrics() {
         {/* SWOT Analysis */}
         <div className="mb-6">
           <div className="grid grid-cols-4 gap-4 h-24">
-            <div className="bg-green-500 rounded-lg" />
-            <div className="bg-red-500 rounded-lg" />
-            <div className="bg-purple-400 rounded-lg" />
-            <div className="bg-yellow-400 rounded-lg" />
+            <div className="bg-green-500 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Strengths</h3>
+              <p className="text-white text-xs">Strong tech sector market position</p>
+            </div>
+            <div className="bg-red-500 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Weaknesses</h3>
+              <p className="text-white text-xs">High exposure to volatile markets</p>
+            </div>
+            <div className="bg-purple-400 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Opportunities</h3>
+              <p className="text-white text-xs">Emerging markets and new technologies</p>
+            </div>
+            <div className="bg-yellow-400 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Threats</h3>
+              <p className="text-white text-xs">Regulatory changes and economic uncertainty</p>
+            </div>
           </div>
         </div>
 

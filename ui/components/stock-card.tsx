@@ -12,7 +12,7 @@ export function StockCard({ name, symbol, price, change, chartUrl }: StockCardPr
   const isPositive = change > 0
   const bgColor = isPositive ? 'bg-green-100' : 'bg-red-100'
   const textColor = isPositive ? 'text-green-600' : 'text-red-600'
-  
+
   return (
     <Card className={`${bgColor} p-4 relative overflow-hidden`}>
       <div className="flex justify-between items-start mb-2">

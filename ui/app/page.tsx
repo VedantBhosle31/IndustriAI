@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { AlertTriangle } from 'lucide-react'
 import Link from "next/link"
 import { useState } from "react"
-import { useRouter } from "next/navigation";
 
 const stocks = [
   { name: "NVIDIA", symbol: "NVDA", price: 203.65, change: 5.63, chartUrl: "/placeholder.svg" },
@@ -21,14 +20,6 @@ export default function DashboardPage() {
   const [selectedOption, setSelectedOption] = useState('Medium');
   const [previousOption, setPreviousOption] = useState('Medium');
   const options = ['Small', 'Medium', 'Large'];
-  const router = useRouter();
-
-
-  const handleRedirect = () => {
-    router.push('/portfolio');
-  };
-
-
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPreviousOption(selectedOption);
@@ -100,19 +91,11 @@ export default function DashboardPage() {
                   Portfolio risk level has changed. Click to review and adjust your strategy.
                 </div>
                 {hasRiskChanged && (
-                  <div>
-                    <Button variant="ghost" size="sm" className="mt-2" onClick={
-                      () => {
-                        router.push('/portfolio');
-                      }
-                    }>
+                  <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
+                    <Button variant="ghost" size="sm" className="mt-2">
                       Optimise Current Portfolio
                     </Button>
-                    <Button variant="ghost" size="sm" className="mt-2" onClick={
-                      () => {
-                        router.push('/trading');
-                      }
-                    }>
+                    <Button variant="ghost" size="sm" className="mt-2">
                       Review New Portfolio Strategy
                     </Button>
                   </div>

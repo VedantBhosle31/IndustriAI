@@ -3,72 +3,74 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import Image from "next/image"
 
 const stocks = [
   {
     name: "NVIDIA",
-    logo: "/placeholder.svg",
-    value: 150,
-    valueChange: 2.3,
-    esg: { value: 15, change: -2.3 },
-    risk: { value: 15, change: -2.3 },
-    roi: { value: 15, change: -2.3 },
+    logo: "/logos/NVDA.png",
+    value: 480,
+    valueChange: 5.3,
+    esg: { value: 80, change: 1.2 },
+    risk: { value: 30, change: -1.5 },
+    roi: { value: 25, change: 3.8 },
   },
   {
     name: "JIO",
     logo: "/placeholder.svg",
-    value: 130,
-    valueChange: 2.3,
-    esg: { value: 15, change: 20.3 },
-    risk: { value: 15, change: 20.3 },
-    roi: { value: 15, change: -12.2 },
+    value: 150,
+    valueChange: 2.1,
+    esg: { value: 55, change: 0.8 },
+    risk: { value: 45, change: 2.3 },
+    roi: { value: 18, change: -1.2 },
   },
   {
-    name: "P.H.",
-    logo: "/placeholder.svg",
-    value: 150,
-    valueChange: 2.3,
-    esg: { value: 15, change: -2.3 },
-    risk: { value: 15, change: -2.3 },
-    roi: { value: 15, change: -2.3 },
+    name: "AMD",
+    logo: "/logos/AMD.png",
+    value: 420,
+    valueChange: 6.5,
+    esg: { value: 70, change: 2.4 },
+    risk: { value: 28, change: -1.1 },
+    roi: { value: 22, change: 4.0 },
+  },
+  {
+    name: "Apple",
+    logo: "/logos/AAPL.png",
+    value: 600,
+    valueChange: 3.2,
+    esg: { value: 85, change: 1.8 },
+    risk: { value: 20, change: -0.7 },
+    roi: { value: 30, change: 1.9 },
+  },
+  {
+    name: "Microsoft",
+    logo: "/logos/MSFT.png",
+    value: 340,
+    valueChange: 2.0,
+    esg: { value: 90, change: 1.5 },
+    risk: { value: 15, change: -0.4 },
+    roi: { value: 28, change: 1.8 },
   },
   {
     name: "Tata",
     logo: "/placeholder.svg",
-    value: 150,
-    valueChange: 2.3,
-    esg: { value: 15, change: -2.3 },
-    risk: { value: 15, change: -2.3 },
-    roi: { value: 15, change: -2.3 },
+    value: 190,
+    valueChange: -1.2,
+    esg: { value: 60, change: -0.5 },
+    risk: { value: 35, change: 0.7 },
+    roi: { value: 14, change: -1.3 },
   },
   {
     name: "Meta",
     logo: "/placeholder.svg",
-    value: 200,
-    valueChange: 2.3,
-    esg: { value: 15, change: -2.3 },
-    risk: { value: 15, change: -2.3 },
-    roi: { value: 15, change: -2.3 },
+    value: 285,
+    valueChange: 4.7,
+    esg: { value: 65, change: 2.0 },
+    risk: { value: 25, change: -1.2 },
+    roi: { value: 21, change: 3.5 },
   },
-  {
-    name: "Apple",
-    logo: "/placeholder.svg",
-    value: 175,
-    valueChange: 1.8,
-    esg: { value: 18, change: 1.5 },
-    risk: { value: 12, change: -1.7 },
-    roi: { value: 20, change: 2.1 },
-  },
-  {
-    name: "Microsoft",
-    logo: "/placeholder.svg",
-    value: 310,
-    valueChange: 0.9,
-    esg: { value: 20, change: 2.8 },
-    risk: { value: 10, change: -0.8 },
-    roi: { value: 18, change: 1.5 },
-  },
-]
+];
+
 
 export function StockTable() {
   return (
@@ -100,7 +102,8 @@ export function StockTable() {
                 >
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <img src={stock.logo} alt="" className="h-6 w-6" />
+                      {/* <img src={stock.logo} alt="" className="h-6 w-6" /> */}
+                      <Image src={stock.logo} alt="" width={24} height={24} />
                       {stock.name}
                     </div>
                   </TableCell>
