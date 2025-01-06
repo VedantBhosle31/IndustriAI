@@ -24,7 +24,12 @@ const colors = {
     META: "#ff0000",
 }
 
-export function CompareSection() {
+interface CompareSectionProps {
+    selectedStocks: string;
+    setSelectedStocks: (stocks: string) => void;
+}
+
+export function CompareSection({ selectedStocks, setSelectedStocks }: CompareSectionProps) {
     return (
         <Card>
             <CardHeader>

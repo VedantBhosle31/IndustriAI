@@ -139,7 +139,12 @@ const strategies: Strategy[] = [
     }
 ]
 
-export function StrategySection() {
+type StrategySectionProps = {
+    selectedStocks: string;
+    setSelectedStocks: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export function StrategySection({ selectedStocks, setSelectedStocks }: StrategySectionProps) {
     const [strategyData, setStrategyData] = useState<Strategy[]>(strategies)
     const [selectedStrategy, setSelectedStrategy] = useState<Strategy>(strategies[0])
     // const strategy = strategies.find(s => s === selectedStrategy)!
@@ -261,22 +266,32 @@ export function StrategySection() {
                         <ScrollArea className="h-[120px]">
                             <div className="space-y-2">
                                 {selectedStrategy.recommendations.buy.map((stock, index) => (
-                                    <div
+                                    <Button
                                         key={index}
-                                        className="flex items-center gap-2 p-2 rounded-lg bg-green-50"
+                                        variant="outline"
+                                        onClick={() => setSelectedStocks(stock.ticker)}
+                                        className="w-full justify-start gap-2 bg-green-50 "
                                     >
-                                        <img src="/placeholder.svg" alt="" className="h-6 w-6" />
-                                        <span>{stock.ticker}</span>
-                                    </div>
+                                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                                            <img src="/placeholder.svg" alt="" className="h-4 w-4" />
+                                        </div>
+                                        <span className="font-medium">{stock.ticker}</span>
+                                        <span className="ml-auto text-sm text-muted-foreground">+2.4%</span>
+                                    </Button>
                                 ))}
                                 {selectedStrategy.recommendations.sell.map((stock, index) => (
-                                    <div
+                                    <Button
                                         key={index}
-                                        className="flex items-center gap-2 p-2 rounded-lg bg-red-50"
+                                        variant="outline"
+                                        onClick={() => setSelectedStocks(stock.ticker)}
+                                        className="w-full justify-start gap-2 bg-red-50 "
                                     >
-                                        <img src="/placeholder.svg" alt="" className="h-6 w-6" />
-                                        <span>{stock.ticker}</span>
-                                    </div>
+                                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                                            <img src="/placeholder.svg" alt="" className="h-4 w-4" />
+                                        </div>
+                                        <span className="font-medium">{stock.ticker}</span>
+                                        <span className="ml-auto text-sm text-muted-foreground">+2.4%</span>
+                                    </Button>
                                 ))}
                                 {/* <Button variant="link" className="text-sm px-0">
                                     show more

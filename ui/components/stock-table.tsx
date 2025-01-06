@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Image from "next/image"
+import { useRouter } from 'next/navigation';
 
 const stocks = [
   {
@@ -73,11 +74,16 @@ const stocks = [
 
 
 export function StockTable() {
+  const router = useRouter();
+
+  const handleOptimizeClick = () => {
+    router.push('/trading');
+  };
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Your stocks</h2>
-        <Button variant="secondary">Optimize Strategy</Button>
+        <Button variant="secondary" onClick={handleOptimizeClick}>Optimize Strategy</Button>
       </div>
       <div className="border rounded-lg">
         <Table>

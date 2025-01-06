@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { AlertTriangle } from 'lucide-react'
 import Link from "next/link"
 import { useState } from "react"
+import { useRouter } from 'next/navigation';
 
 const stocks = [
   { name: "NVIDIA", symbol: "NVDA", price: 203.65, change: 5.63, chartUrl: "/placeholder.svg" },
@@ -24,6 +25,15 @@ export default function DashboardPage() {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPreviousOption(selectedOption);
     setSelectedOption(event.target.value);
+  };
+  const router = useRouter();
+
+  const handleOptimizeClick = () => {
+    router.push('/trading');
+  };
+
+  const handleNewPortfolioClick = () => {
+    router.push('/portfolio');
   };
 
   const hasRiskChanged = selectedOption !== previousOption;
@@ -63,12 +73,8 @@ export default function DashboardPage() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Current Risk</CardTitle>
-                <Link href="/portfolio">
-                  <Button variant="ghost" size="sm">
-                    Adjust Risk
-                  </Button>
-                </Link>
+                <CardTitle>Risk Appetite</CardTitle>
+
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
@@ -92,10 +98,10 @@ export default function DashboardPage() {
                 </div>
                 {hasRiskChanged && (
                   <div className="fixed bottom-4 right-4 flex flex-col space-y-2">
-                    <Button variant="ghost" size="sm" className="mt-2">
+                    <Button variant="ghost" size="sm" className="mt-2" onClick={handleNewPortfolioClick}>
                       Optimise Current Portfolio
                     </Button>
-                    <Button variant="ghost" size="sm" className="mt-2">
+                    <Button variant="ghost" size="sm" className="mt-2" onClick={handleOptimizeClick}>
                       Review New Portfolio Strategy
                     </Button>
                   </div>
