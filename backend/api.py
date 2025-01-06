@@ -96,7 +96,7 @@ def get_strategies():
 # https://127.0.0.1:5000/api/analytics/strategies?portfolio=AAPL,GOOGL,META,MSFT,AMZN?prompt=%22I%20want%20to%20focus%20on%20EV%20market%20and%20emerging%20tech,%20but%20avoid%20traditional%20energy.%20Looking%20for%20growth%20opportunities%20in%20next%202-3%20years.%22
 
 
-@app.route('api/chat/portfolio/reset', methods=['GET'])
+@app.route('/api/chat/portfolio/reset', methods=['GET'])
 def reset_portfolio_chat():
     user_id = request.args.get('user_id')
     if user_id in conversations:
