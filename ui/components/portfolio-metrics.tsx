@@ -57,10 +57,22 @@ export function PortfolioMetrics() {
         {/* SWOT Analysis */}
         <div className="mb-6">
           <div className="grid grid-cols-4 gap-4 h-24">
-            <div className="bg-green-500 rounded-lg" />
-            <div className="bg-red-500 rounded-lg" />
-            <div className="bg-purple-400 rounded-lg" />
-            <div className="bg-yellow-400 rounded-lg" />
+            <div className="bg-green-500 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Strengths</h3>
+              <p className="text-white text-xs">Strong tech sector market position</p>
+            </div>
+            <div className="bg-red-500 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Weaknesses</h3>
+              <p className="text-white text-xs">High exposure to volatile markets</p>
+            </div>
+            <div className="bg-purple-400 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Opportunities</h3>
+              <p className="text-white text-xs">Emerging markets and new technologies</p>
+            </div>
+            <div className="bg-yellow-400 rounded-lg p-2">
+              <h3 className="font-semibold text-white mb-1 text-xs">Threats</h3>
+              <p className="text-white text-xs">Regulatory changes and economic uncertainty</p>
+            </div>
           </div>
         </div>
 
