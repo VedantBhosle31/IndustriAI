@@ -3,7 +3,6 @@
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
 const data = [
   { time: "10 am", value: 11000 },
@@ -32,21 +31,13 @@ export function PortfolioAnalytics() {
         </Tabs>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={{
-            value: {
-              label: "Portfolio Value",
-              color: "hsl(var(--primary))",
-            },
-          }}
-          className="h-[300px]"
-        >
+        <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
               <XAxis dataKey="time" />
               <YAxis />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Line 
+              <Tooltip />
+              <Line
                 type="monotone"
                 dataKey="value"
                 stroke="hsl(var(--primary))"
@@ -55,7 +46,7 @@ export function PortfolioAnalytics() {
               />
             </LineChart>
           </ResponsiveContainer>
-        </ChartContainer>
+        </div>
       </CardContent>
     </Card>
   )

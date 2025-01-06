@@ -3,100 +3,81 @@
 import { useState } from "react"
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MultiSelect } from "@/components/ui/multi-select"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const data = [
-  { date: "Jan", NIFTY50: 100, NIFTYES: 110, NIFTYSM: 90, NVIDIA: 150, META: 120, TSLA: 200, AAPL: 180 },
-  { date: "Feb", NIFTY50: 120, NIFTYES: 130, NIFTYSM: 110, NVIDIA: 160, META: 110, TSLA: 220, AAPL: 190 },
-  { date: "Mar", NIFTY50: 110, NIFTYES: 120, NIFTYSM: 100, NVIDIA: 155, META: 115, TSLA: 210, AAPL: 185 },
-  { date: "Apr", NIFTY50: 130, NIFTYES: 140, NIFTYSM: 120, NVIDIA: 170, META: 125, TSLA: 230, AAPL: 195 },
-  { date: "May", NIFTY50: 140, NIFTYES: 150, NIFTYSM: 130, NVIDIA: 180, META: 130, TSLA: 240, AAPL: 200 },
-  { date: "Jun", NIFTY50: 150, NIFTYES: 160, NIFTYSM: 140, NVIDIA: 190, META: 135, TSLA: 250, AAPL: 210 },
+  { date: "Jan", NIFTY50: 100, NIFTYES: 110, NIFTYSM: 90, Portfolio: 95, ROI: 5, ESG: 80, Risk: 20, Value: 1000 },
+  { date: "Feb", NIFTY50: 120, NIFTYES: 130, NIFTYSM: 110, Portfolio: 115, ROI: 7, ESG: 82, Risk: 18, Value: 1150 },
+  { date: "Mar", NIFTY50: 110, NIFTYES: 120, NIFTYSM: 100, Portfolio: 105, ROI: 6, ESG: 85, Risk: 19, Value: 1050 },
+  { date: "Apr", NIFTY50: 130, NIFTYES: 140, NIFTYSM: 120, Portfolio: 125, ROI: 8, ESG: 83, Risk: 17, Value: 1250 },
+  { date: "May", NIFTY50: 140, NIFTYES: 150, NIFTYSM: 130, Portfolio: 135, ROI: 9, ESG: 86, Risk: 16, Value: 1350 },
+  { date: "Jun", NIFTY50: 150, NIFTYES: 160, NIFTYSM: 140, Portfolio: 145, ROI: 10, ESG: 88, Risk: 15, Value: 1450 },
 ]
 
 const kpiOptions = [
-  { value: "esg", label: "ESG Score" },
-  { value: "diversity", label: "Diversity" },
-  { value: "roi", label: "ROI" },
-  { value: "risk", label: "Risk" },
-  { value: "si", label: "Sustainability Impact" },
-]
-
-const marketIndicators = [
-  { value: "NIFTY50", label: "NIFTY 50" },
-  { value: "NIFTYES", label: "NIFTY ES" },
-  { value: "NIFTYSM", label: "NIFTY Small Cap" },
-  { value: "SENSEX", label: "SENSEX" },
-]
-
-const portfolioStocks = [
-  { value: "NVIDIA", label: "NVIDIA" },
-  { value: "META", label: "Meta" },
-  { value: "TSLA", label: "Tesla" },
-  { value: "AAPL", label: "Apple" },
+  { value: "Value", label: "Value" },
+  { value: "ROI", label: "ROI" },
+  { value: "ESG", label: "ESG" },
+  { value: "Risk", label: "Risk" },
 ]
 
 export function PortfolioKPIs() {
-  const [selectedKPIs, setSelectedKPIs] = useState<string[]>(["esg"])
-  const [selectedIndicators, setSelectedIndicators] = useState<string[]>(["NIFTY50"])
-  const [selectedStocks, setSelectedStocks] = useState<string[]>(["NVIDIA"])
-
-  const allSelectedItems = [...selectedIndicators, ...selectedStocks]
-
-  const chartConfig = allSelectedItems.reduce((acc, item) => {
-    acc[item] = {
-      label: item,
-      color: `hsl(${Math.random() * 360}, 70%, 50%)`,
-    }
-    return acc
-  }, {} as Record<string, { label: string; color: string }>)
+  const [selectedKPI, setSelectedKPI] = useState("Value")
 
   return (
     <Card>
-      <CardHeader className="flex flex-col space-y-4">
-        <CardTitle>Portfolio KPIs</CardTitle>
-        <div className="flex flex-wrap items-center gap-4">
-          <MultiSelect
-            options={kpiOptions}
-            selected={selectedKPIs}
-            onChange={setSelectedKPIs}
-            placeholder="Select KPIs"
-          />
-          <MultiSelect
-            options={marketIndicators}
-            selected={selectedIndicators}
-            onChange={setSelectedIndicators}
-            placeholder="Select Market Indicators"
-          />
-          <MultiSelect
-            options={portfolioStocks}
-            selected={selectedStocks}
-            onChange={setSelectedStocks}
-            placeholder="Select Stocks"
-          />
+      <CardHeader>
+        <div className="flex justify-between items-center">
+          <CardTitle>Portfolio KPIs</CardTitle>
+          <Select value={selectedKPI} onValueChange={setSelectedKPI}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select KPI" />
+            </SelectTrigger>
+            <SelectContent>
+              {kpiOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[400px]">
+        <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
               <XAxis dataKey="date" />
               <YAxis />
-              <Tooltip content={<ChartTooltipContent />} />
+              <Tooltip />
               <Legend />
-              {allSelectedItems.map((item) => (
-                <Line
-                  key={item}
-                  type="monotone"
-                  dataKey={item}
-                  stroke={`var(--color-${item})`}
-                  strokeWidth={2}
-                />
-              ))}
+              <Line
+                type="monotone"
+                dataKey={selectedKPI}
+                stroke="hsl(var(--primary))"
+                strokeWidth={2}
+              />
+              <Line
+                type="monotone"
+                dataKey="NIFTY50"
+                stroke="hsl(var(--secondary))"
+                strokeWidth={2}
+              />
+              <Line
+                type="monotone"
+                dataKey="NIFTYES"
+                stroke="hsl(var(--accent))"
+                strokeWidth={2}
+              />
+              <Line
+                type="monotone"
+                dataKey="NIFTYSM"
+                stroke="hsl(var(--destructive))"
+                strokeWidth={2}
+              />
             </LineChart>
           </ResponsiveContainer>
-        </ChartContainer>
+        </div>
       </CardContent>
     </Card>
   )

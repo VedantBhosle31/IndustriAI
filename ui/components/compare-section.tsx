@@ -1,14 +1,9 @@
 "use client"
 
-import { useState } from "react"
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { X, Search } from 'lucide-react'
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { X } from 'lucide-react'
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 const data = [
     { name: "Jan", DELL: 80, AAPL: 140, TSLA: 20, GOOG: 90, META: 110 },
@@ -19,121 +14,31 @@ const data = [
     { name: "Jun", DELL: 70, AAPL: 10, TSLA: 180, GOOG: 140, META: 70 },
 ]
 
-const availableStocks = [
-    { value: "DELL", label: "Dell Technologies" },
-    { value: "AAPL", label: "Apple Inc." },
-    { value: "TSLA", label: "Tesla Inc." },
-    { value: "GOOG", label: "Google" },
-    { value: "META", label: "Meta Platforms" },
-    { value: "MSFT", label: "Microsoft" },
-    { value: "AMZN", label: "Amazon" },
-    { value: "NVDA", label: "NVIDIA" },
-]
+const stocks = ["DELL", "AAPL", "TSLA", "GOOG", "META"]
 
 const colors = {
-    DELL: "hsl(10, 70%, 50%)",
-    AAPL: "hsl(100, 70%, 50%)",
-    TSLA: "hsl(200, 70%, 50%)",
-    GOOG: "hsl(270, 70%, 50%)",
-    META: "hsl(340, 70%, 50%)",
-    MSFT: "hsl(160, 70%, 50%)",
-    AMZN: "hsl(40, 70%, 50%)",
-    NVDA: "hsl(220, 70%, 50%)",
+    DELL: "#ff7300",
+    AAPL: "#00ff00",
+    TSLA: "#0088fe",
+    GOOG: "#8884d8",
+    META: "#ff0000",
 }
 
 export function CompareSection() {
-    const [selectedStocks, setSelectedStocks] = useState(["DELL", "AAPL", "TSLA", "GOOG", "META"])
-    const [open, setOpen] = useState(false)
-
-    const handleRemoveStock = (stockToRemove: string) => {
-        setSelectedStocks(selectedStocks.filter(stock => stock !== stockToRemove))
-    }
-
-    const handleAddStock = (stockToAdd: string) => {
-        if (!selectedStocks.includes(stockToAdd)) {
-            setSelectedStocks([...selectedStocks, stockToAdd])
-        }
-        setOpen(false)
-    }
-
-    const onDragEnd = (result: any) => {
-        if (!result.destination) return
-
-        const items = Array.from(selectedStocks)
-        const [reorderedItem] = items.splice(result.source.index, 1)
-        items.splice(result.destination.index, 0, reorderedItem)
-
-        setSelectedStocks(items)
-    }
-
     return (
         <Card>
             <CardHeader>
-                <div className="flex items-center justify-between mb-2">
+                <div className="space-y-4">
                     <CardTitle>Compare</CardTitle>
-                    <Popover open={open} onOpenChange={setOpen}>
-                        <PopoverTrigger asChild>
-                            <Button variant="outline" size="sm">
-                                <Search className="h-4 w-4 mr-2" />
-                                Add Stock
+                    <div className="flex flex-wrap gap-2">
+                        {stocks.map((stock) => (
+                            <Button key={stock} variant="secondary" size="sm" className="gap-2">
+                                {stock}
+                                <X className="h-4 w-4" />
                             </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="p-0" align="end">
-                            <Command>
-                                <CommandInput placeholder="Search stocks..." />
-                                <CommandEmpty>No stocks found.</CommandEmpty>
-                                <CommandGroup>
-                                    {availableStocks
-                                        .filter(stock => !selectedStocks.includes(stock.value))
-                                        .map(stock => (
-                                            <CommandItem
-                                                key={stock.value}
-                                                onSelect={() => handleAddStock(stock.value)}
-                                            >
-                                                {stock.label} ({stock.value})
-                                            </CommandItem>
-                                        ))}
-                                </CommandGroup>
-                            </Command>
-                        </PopoverContent>
-                    </Popover>
+                        ))}
+                    </div>
                 </div>
-                <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId="stocks" direction="horizontal">
-                        {(provided) => (
-                            <div
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                                className="flex flex-wrap gap-2"
-                            >
-                                {selectedStocks.map((stock, index) => (
-                                    <Draggable key={stock} draggableId={stock} index={index}>
-                                        {(provided) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <Button variant="secondary" size="sm" className="gap-2">
-                                                    {stock}
-                                                    <X
-                                                        className="h-4 w-4 hover:text-destructive"
-                                                        onClick={(e) => {
-                                                            e.preventDefault()
-                                                            e.stopPropagation()
-                                                            handleRemoveStock(stock)
-                                                        }}
-                                                    />
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </DragDropContext>
             </CardHeader>
             <CardContent>
                 <div className="h-[300px]">
@@ -141,14 +46,14 @@ export function CompareSection() {
                         <LineChart data={data}>
                             <XAxis dataKey="name" />
                             <YAxis />
-                            <Tooltip />
-                            {selectedStocks.map((stock) => (
+                            {stocks.map((stock) => (
                                 <Line
                                     key={stock}
                                     type="monotone"
                                     dataKey={stock}
                                     stroke={colors[stock]}
                                     strokeWidth={2}
+                                    dot={false}
                                 />
                             ))}
                         </LineChart>
