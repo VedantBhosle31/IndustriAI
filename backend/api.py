@@ -12,6 +12,9 @@ import json
 import os
 import pandas as pd
 import requests as R
+from CompanyInfo import CompanyInfo
+
+company_info = CompanyInfo()
 
 
 os.environ['GROQ_API_KEY'] = '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'
@@ -159,15 +162,42 @@ def get_portfolio(prompt = "Improve my strategies"):
         'ROI_PCT' : roi_pct,
         'Principle': month_ago['Close'],
         }
+        data.update(rest_api_call(f"/api/company/basic/{ticker}", method='GET'))
         portfolio_data.append(data)
     ret = {'tickers':portfolio_data,
         'overall':pd.DataFrame(portfolio_data)[['ESG','Risk', 'ROI', 'Principle']].mean().to_dict(),
         'swot':rest_api_call(f"/api/analytics/swot?portfolio={','.join(tickers)}","GET"),
         "strategies":rest_api_call(f"/api/analytics/strategies?portfolio={','.join(tickers)}?prompt={prompt}", 'GET', data=None, headers=None),
         }
+    
     return ret
 
-
+@app.route("/api/company/basic/<ticker>", methods=["GET"])
+def get_company_basic(ticker):
+    """Get company logo URL and name"""
+    try:
+        # Get company data
+        data = company_info.get_company_data(ticker)
+        
+        # Return simplified response with just logo and names
+        return jsonify({
+            'ticker': ticker,
+            'name': data.get('name', ticker),
+            'short_name': data.get('short_name', ticker),
+            'logo_url': company_info.get_best_logo_url(ticker),
+            'sector': data.get('sector', 'Unknown'),
+            'industry': data.get('industry', 'Unknown')
+        })
+    except Exception as e:
+        return jsonify({
+            'ticker': ticker,
+            'name': ticker,
+            'short_name': ticker,
+            'logo_url': f"https://ui-avatars.com/api/?name={ticker}&background=random",
+            'sector': 'Unknown',
+            'industry': 'Unknown',
+            'error': str(e)
+        }), 404
 
 # Run the app
 if __name__ == "__main__":
