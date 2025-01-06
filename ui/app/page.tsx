@@ -1,3 +1,4 @@
+'use client';
 import { Sidebar } from "@/components/sidebar"
 import { StockCard } from "@/components/stock-card"
 import { PortfolioChart } from "@/components/portfolio-chart"
@@ -5,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { AlertTriangle } from 'lucide-react'
 import Link from "next/link"
+import { useState } from "react"
+import { useRouter } from "next/navigation";
 
 const stocks = [
   { name: "NVIDIA", symbol: "NVDA", price: 203.65, change: 5.63, chartUrl: "/placeholder.svg" },
@@ -15,6 +18,26 @@ const stocks = [
 ]
 
 export default function DashboardPage() {
+  const [selectedOption, setSelectedOption] = useState('Medium');
+  const [previousOption, setPreviousOption] = useState('Medium');
+  const options = ['Small', 'Medium', 'Large'];
+  const router = useRouter();
+
+
+  const handleRedirect = () => {
+    router.push('/portfolio');
+  };
+
+
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPreviousOption(selectedOption);
+    setSelectedOption(event.target.value);
+  };
+
+  const hasRiskChanged = selectedOption !== previousOption;
+
+
   return (
     <div className="flex min-h-screen">
       <Sidebar />
@@ -25,7 +48,7 @@ export default function DashboardPage() {
               <StockCard key={stock.symbol} {...stock} />
             ))}
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
@@ -36,7 +59,7 @@ export default function DashboardPage() {
                 <div className="text-sm text-green-600 mt-1">+5.63%</div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Invested Amount</CardTitle>
@@ -59,17 +82,47 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="h-5 w-5 text-yellow-500" />
-                  <div className="text-2xl font-bold">Medium</div>
+                  <div className="text-2xl font-bold">
+                    <select
+                      value={selectedOption}
+                      onChange={handleChange}
+                      className="bg-white border border-gray-300 rounded-md p-2"
+                    >
+                      {options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
                 <div className="mt-2 text-sm text-muted-foreground">
                   Portfolio risk level has changed. Click to review and adjust your strategy.
                 </div>
+                {hasRiskChanged && (
+                  <div>
+                    <Button variant="ghost" size="sm" className="mt-2" onClick={
+                      () => {
+                        router.push('/portfolio');
+                      }
+                    }>
+                      Optimise Current Portfolio
+                    </Button>
+                    <Button variant="ghost" size="sm" className="mt-2" onClick={
+                      () => {
+                        router.push('/trading');
+                      }
+                    }>
+                      Review New Portfolio Strategy
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
-          
+
           <PortfolioChart />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="col-span-2">
               <CardHeader>
@@ -94,7 +147,7 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Watchlist</CardTitle>
