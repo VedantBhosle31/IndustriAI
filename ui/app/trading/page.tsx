@@ -1,7 +1,7 @@
 import { Sidebar } from "@/components/sidebar"
-import { CompareTool } from "@/components/compare-tool"
-import { StrategyBuilder } from "@/components/strategy-builder"
-import { StockAnalysis } from "@/components/stock-analysis"
+import { MarketSection } from "@/components/market-section"
+import { CompareSection } from "@/components/compare-section"
+import { StrategySection } from "@/components/strategy-section"
 
 export default function TradingPage() {
   return (
@@ -9,12 +9,10 @@ export default function TradingPage() {
       <Sidebar />
       <main className="flex-1 p-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <MarketSection />
           <div className="space-y-6">
-            <CompareTool />
-            <StrategyBuilder />
-          </div>
-          <div>
-            <StockAnalysis />
+            <CompareSection />
+            <StrategySection />
           </div>
         </div>
       </main>
